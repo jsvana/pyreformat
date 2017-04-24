@@ -2,6 +2,20 @@
 
 `pyreformat` is a small script and vim function to convert Python function calls and definitions. It toggles between single and multi-line definitions.
 
+It changes
+
+    def foo(a, b='c', **d):
+
+into
+
+    def foo(
+        a,
+        b='c',
+        **d,
+    ):
+
+and vice versa, plus the same action on function calls.
+
 ## Installation
 
 Script:
