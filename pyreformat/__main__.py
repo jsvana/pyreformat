@@ -32,16 +32,6 @@ def parse_args():
     return parser.parse_args()
 
 
-def foo(a, b: 'asdf', fake_one, asdf, c=1, foo='bar', **opts):
-
-    def bar(a, b: 'asdf',
-        fake_one,
-        asdf,
-        c=1, foo='bar', **opts,
-    ):
-        pass
-
-
 def find_arg(root, line):
     for node in ast.walk(root):
         if not isinstance(node, (ast.Call, ast.FunctionDef)):
