@@ -87,7 +87,14 @@ def find_surrounding_parens(body, line):
     return opening, closing
 
 
-def reformat_body(body, ast_node, opening, closing, spaces_per_indent, multiline):
+def reformat_body(
+    body,
+    ast_node,
+    opening,
+    closing,
+    spaces_per_indent,
+    multiline,
+):
     m = re.match(r'^(\s*)', body[opening])
     opening_whitespace = len(m.groups()[0])
     joined_line = ''.join(body[opening:closing + 1])
@@ -100,7 +107,6 @@ def reformat_body(body, ast_node, opening, closing, spaces_per_indent, multiline
         joined_line,
     )
     if not multiline:
-        removed_lines = closing - opening
         return body[:opening] + [joined_line] + body[closing + 1:]
 
     m = re.match(r'(.*\()(.*)\).*', joined_line)
@@ -132,7 +138,14 @@ def main():
     body = body.split('\n')[:-1]
 
     opening, closing = find_surrounding_parens(body, node.lineno)
-    new_body = reformat_body(body, node, opening, closing, args.spaces_per_indent, multiline=opening == closing)
+    new_body = reformat_body(
+        body,
+        node,
+        opening,
+        closing,
+        args.spaces_per_indent,
+        multiline=opening == closing,
+    )
 
     content = '\n'.join(new_body)
     if args.in_place:
