@@ -10,12 +10,7 @@ Script:
     $ cp pyreformat/__main__.py $HOME/bin
     $ chmod +x $HOME/bin/pyreformat
 
-vim function:
-
-    $ cat >> $HOME/.vim/vimrc
-    if filereadable(expand(pyreformat/checkout/pyreformat.vim))
-      source pyreformat/checkout/pyreformat.vim
-    endif
+For convenient usage in vim, see https://github.com/jsvana/pyreformat.vim.
 
 ## Usage
 
