@@ -40,7 +40,7 @@ def find_arg(root, line):
             return node
         if isinstance(node, ast.Call):
             for prop, args in ast.iter_fields(node):
-                if prop == 'func':
+                if prop == 'func' or args is None:
                     continue
                 for arg in args:
                     if isinstance(arg, ast.keyword):
