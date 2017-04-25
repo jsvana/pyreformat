@@ -109,14 +109,14 @@ def reformat_body(
     if not multiline:
         return body[:opening] + [joined_line] + body[closing + 1:]
 
-    m = re.match(r'(.*\()(.*)\).*', joined_line)
+    m = re.match(r'(.*\()(.*)(\).*)', joined_line)
     name = m.groups()[0]
     args = [a.strip().replace(',', '') for a in m.groups()[1].split(', ')]
+    suffix = m.groups()[2]
     indent = ' ' * (opening_whitespace + spaces_per_indent)
     new_definition = [name]
     new_definition.extend(['{}{},'.format(indent, a) for a in args])
-    suffix = ':' if isinstance(ast_node, ast.FunctionDef) else ''
-    new_definition.append('{}){}'.format(' ' * opening_whitespace, suffix))
+    new_definition.append('{}{}'.format(' ' * opening_whitespace, suffix))
     return body[:opening] + new_definition + body[closing + 1:]
 
 
